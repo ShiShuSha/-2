@@ -1,0 +1,32 @@
+def main():
+    products = input("Введите список товаров, разделенных запятыми: ").split(',')
+    products = [product.strip() for product in products] 
+
+    prices = {}
+    while True:
+        store_name = input("Введите название магазина (или 'стоп' для окончания ввода): ")
+        if store_name.lower() == 'стоп':
+            break
+        store_prices = []
+        for product in products:
+            price = float(input(f"Введите цену товара '{product}' в магазине '{store_name}': "))
+            store_prices.append(price)
+        prices[store_name] = store_prices
+
+    total_costs = {store: sum(store_prices) for store, store_prices in prices.items()}
+
+    print("Общая стоимость покупок в каждом магазине:")
+    for store, total in total_costs.items():
+        print(f"{store}: {total:.2f} руб.")
+
+    if total_costs:
+        min_cost = min(total_costs.values())
+        best_store = [store for store, total in total_costs.items() if total == min_cost]
+
+        print("Сэкономите больше всего, купив товары в магазине:", best_store, "со стоимостью:", min_cost, "руб.")
+    else:
+        print("Не было введено ни одного магазина.")
+
+
+if __name__ == "__main__":
+    main()
