@@ -1,0 +1,17 @@
+import json
+from dicttoxml import dicttoxml
+
+def convert_json_to_xml(json_file, xml_file):
+    
+    with open(json_file, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    
+    xml_data = dicttoxml(data, custom_root='People', attr_type=False)
+
+    
+    with open(xml_file, 'wb') as f:
+        f.write(xml_data)
+
+convert_json_to_xml('data.json', 'data.xml')
+print("Конвертация завершена! Данные сохранены в data.xml.")
